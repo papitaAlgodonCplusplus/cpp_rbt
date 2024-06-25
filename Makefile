@@ -1,6 +1,6 @@
 # Define the compiler and compiler flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17 -g
+CXXFLAGS = -Wall -Wextra -std=c++17 -g -Iinclude
 
 # Define the target executable
 TARGET = main
@@ -19,8 +19,8 @@ OBJFILES = $(SRCFILES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 all: $(TARGET)
 
 # Rule to link the object files into the final executable
-$(TARGET): $(OBJFILES)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(TARGET): $(OBJFILES) main.cpp
+	$(CXX) $(CXXFLAGS) -o $@ main.cpp $^
 
 # Rule to compile each source file into an object file
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
