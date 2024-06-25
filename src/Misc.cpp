@@ -1247,7 +1247,8 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int rounds)
     // Free the memory
     for (int i = 0; i < numRobots * rounds; ++i)
     {
-        delete[] occupiedPositions[i]; // Delete each sub-array
+        if (occupiedPositions[i] != nullptr)
+            delete[] occupiedPositions[i]; // Delete each sub-array
     }
     delete[] occupiedPositions; // Delete the main array
 
