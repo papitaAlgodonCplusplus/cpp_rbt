@@ -38,8 +38,8 @@ public:
     virtual void recharge(int energy) = 0;
     virtual void substract(int energy) = 0;
     virtual void transferEnergy(Robot& target) = 0;
-    void setTeam(int team);
-    int getTeam() const;
+    void setTeam(int team) {this->team = team;};
+    int getTeam() const {return this->team;};
 
 protected:
     int id;
