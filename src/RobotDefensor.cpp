@@ -4,6 +4,38 @@
 RobotDefensor::RobotDefensor(int id, const std::string& name, int energy, int x, int y)
     : Robot(id, name, "Defensor", energy, x, y) {}
 
+RobotDefensor::RobotDefensor(const RobotDefensor& other)
+    : Robot(other)  // Call base class copy constructor
+{
+    defending = other.defending;
+}
+
+RobotDefensor& RobotDefensor::operator=(const RobotDefensor& other)
+{
+    if (this != &other) {
+        Robot::operator=(other);  // Call base class copy assignment operator
+        defending = other.defending;
+    }
+    return *this;
+}
+
+RobotDefensor::RobotDefensor(RobotDefensor&& other) noexcept
+    : Robot(std::move(other))  // Call base class move constructor
+{
+    defending = std::move(other.defending);
+    other.defending = false;  // Reset moved object's state
+}
+
+RobotDefensor& RobotDefensor::operator=(RobotDefensor&& other) noexcept
+{
+    if (this != &other) {
+        Robot::operator=(std::move(other));  // Call base class move assignment operator
+        defending = std::move(other.defending);
+        other.defending = false;  // Reset moved object's state
+    }
+    return *this;
+}
+
 void RobotDefensor::move(int newX, int newY) {
     int distance = abs(newX - posX) + abs(newY - posY);
     int energyRequired = distance * 10;

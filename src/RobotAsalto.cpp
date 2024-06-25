@@ -5,6 +5,32 @@
 RobotAsalto::RobotAsalto(int id, const std::string &name, int energy, int x, int y)
     : Robot(id, name, "Asalto", energy, x, y) {}
 
+RobotAsalto::RobotAsalto(const RobotAsalto& other)
+    : Robot(other)  // Call base class copy constructor
+{
+}
+
+RobotAsalto& RobotAsalto::operator=(const RobotAsalto& other)
+{
+    if (this != &other) {
+        Robot::operator=(other);  // Call base class copy assignment operator
+    }
+    return *this;
+}
+
+RobotAsalto::RobotAsalto(RobotAsalto&& other) noexcept
+    : Robot(std::move(other))  // Call base class move constructor
+{
+}
+
+RobotAsalto& RobotAsalto::operator=(RobotAsalto&& other) noexcept
+{
+    if (this != &other) {
+        Robot::operator=(std::move(other));  // Call base class move assignment operator
+    }
+    return *this;
+}
+
 void RobotAsalto::move(int newX, int newY)
 {
     int distance = abs(newX - posX) + abs(newY - posY);
