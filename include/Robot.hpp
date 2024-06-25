@@ -2,11 +2,26 @@
 #define ROBOT_HPP
 
 #include <string>
+#include <utility> // For std::move
+#include <iostream> //For standard output
 
 class Robot {
 public:
     Robot(int id, const std::string& name, const std::string& type, int energy, int x, int y);
+    // Destructor
     virtual ~Robot() = default;
+
+    // Copy constructor
+    Robot(const Robot& other);
+
+    // Copy assignment operator
+    Robot& operator=(const Robot& other);
+
+    // Move constructor
+    Robot(Robot&& other) noexcept;
+
+    // Move assignment operator
+    Robot& operator=(Robot&& other) noexcept;
 
     int getID() const;
     const std::string& getName() const;
@@ -23,8 +38,8 @@ public:
     virtual void recharge(int energy) = 0;
     virtual void substract(int energy) = 0;
     virtual void transferEnergy(Robot& target) = 0;
-    void setTeam(int team) { this->team = team; }
-    int getTeam() const { return team; }
+    void setTeam(int team);
+    int getTeam() const;
 
 protected:
     int id;
@@ -34,7 +49,7 @@ protected:
     int posX;
     int posY;
     int team;
-    int defended = false;
+    bool defended = false;
 };
 
 #endif
