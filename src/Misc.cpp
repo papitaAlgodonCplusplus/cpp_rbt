@@ -799,6 +799,19 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int **initialPositions,
         }
     }
 
+    // Free the memory
+    for (int i = 0; i < numStations; ++i)
+    {
+        delete[] rechargeStations[i]; // Delete each sub-array
+    }
+    delete[] rechargeStations; // Delete the main array
+
+    // Free the memory
+    for (int i = 0; i < numRobots; ++i)
+    {
+        delete[] occupiedPositions[i]; // Delete each sub-array
+    }
+    delete[] occupiedPositions; // Delete the main array
     std::cout << "\nSimulación finalizada.\n";
 }
 
