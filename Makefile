@@ -14,16 +14,21 @@ SRCFILES = $(wildcard $(SRCDIR)/*.cpp)
 
 # Create a list of object files based on the source files
 OBJFILES = $(SRCFILES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
+MAIN_OBJ = $(OBJDIR)/main.o
 
 # The default target
 all: $(TARGET)
 
 # Rule to link the object files into the final executable
-$(TARGET): $(OBJFILES) main.cpp
-	$(CXX) $(CXXFLAGS) -o $@ main.cpp $^
+$(TARGET): $(OBJFILES) $(MAIN_OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Rule to compile each source file into an object file
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+# Rule to compile the main.cpp file into an object file
+$(MAIN_OBJ): main.cpp | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 # Rule to create the obj directory if it doesn't exist
