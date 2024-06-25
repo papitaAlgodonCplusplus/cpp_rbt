@@ -143,7 +143,9 @@ int markPositionAvailable(int **occupiedPositions, int numRobots, int x, int y)
     {
         if (occupiedPositions[i][0] == x && occupiedPositions[i][1] == y)
         {
-            delete[] occupiedPositions[i];
+            // Mark the position as available (for example, using -1 or another flag)
+            occupiedPositions[i][0] = -1;
+            occupiedPositions[i][1] = -1;
             return i;
         }
     }
@@ -385,7 +387,6 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int **initialPositions,
                             {
                                 last_deleted = markPositionAvailable(occupiedPositions, numRobots, currentRobot->getX(), currentRobot->getY());
                                 currentRobot->move(newX, newY);
-
                                 occupiedPositions[last_deleted][0] = newX;
                                 occupiedPositions[last_deleted][1] = newY;
                             }
@@ -441,7 +442,6 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int **initialPositions,
                         {
                             last_deleted = markPositionAvailable(occupiedPositions, numRobots, currentRobot->getX(), currentRobot->getY());
                             currentRobot->move(newX, newY);
-
                             occupiedPositions[last_deleted][0] = newX;
                             occupiedPositions[last_deleted][1] = newY;
                         }
@@ -509,7 +509,6 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int **initialPositions,
                         {
                             markPositionAvailable(occupiedPositions, numRobots, currentRobot->getX(), currentRobot->getY());
                             currentRobot->move(newX, newY);
-
                             occupiedPositions[last_deleted][0] = newX;
                             occupiedPositions[last_deleted][1] = newY;
                         }
@@ -718,7 +717,6 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int **initialPositions,
 
                         last_deleted = markPositionAvailable(occupiedPositions, numRobots, currentRobot->getX(), currentRobot->getY());
                         currentRobot->move(newX, newY);
-
                         occupiedPositions[last_deleted][0] = newX;
                         occupiedPositions[last_deleted][1] = newY;
                     }
@@ -1077,7 +1075,6 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int rounds)
                             {
                                 last_deleted = markPositionAvailable(occupiedPositions, numRobots, currentRobot->getX(), currentRobot->getY());
                                 currentRobot->move(newX, newY);
-
                                 occupiedPositions[last_deleted][0] = newX;
                                 occupiedPositions[last_deleted][1] = newY;
                             }
@@ -1118,7 +1115,6 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int rounds)
 
                         int last_deleted = markPositionAvailable(occupiedPositions, numRobots, currentRobot->getX(), currentRobot->getY());
                         currentRobot->move(newX, newY);
-
                         occupiedPositions[last_deleted][0] = newX;
                         occupiedPositions[last_deleted][1] = newY;
                     }
@@ -1223,7 +1219,6 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int rounds)
 
                         int last_deleted = markPositionAvailable(occupiedPositions, numRobots, currentRobot->getX(), currentRobot->getY());
                         currentRobot->move(newX, newY);
-
                         occupiedPositions[last_deleted][0] = newX;
                         occupiedPositions[last_deleted][1] = newY;
                     }
@@ -1249,14 +1244,10 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int rounds)
         }
     }
 
-    // Free the memory for occupiedPositions
+    // Free the memory
     for (int i = 0; i < numRobots; ++i)
     {
-        if (occupiedPositions[i] != nullptr)
-        {
-            delete[] occupiedPositions[i];  // Delete each sub-array if it's not nullptr
-            occupiedPositions[i] = nullptr; // Optional: Reset pointer to nullptr after deletion
-        }
+        delete[] occupiedPositions[i]; // Delete each sub-array
     }
     delete[] occupiedPositions; // Delete the main array
 
