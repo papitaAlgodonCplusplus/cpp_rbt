@@ -5,18 +5,21 @@
 #include <memory>
 #include <functional>
 
-class RedBlackTree {
+class RedBlackTree
+{
 public:
-    RedBlackTree(); 
+    RedBlackTree();
+    ~RedBlackTree();
     void insert(std::shared_ptr<Robot> robot);
     void remove(int robotID);
     std::shared_ptr<Robot> find(int robotID);
     void printInOrder();
-    void forEach(const std::function<void(std::shared_ptr<Robot>)>& func) const;
+    void forEach(const std::function<void(std::shared_ptr<Robot>)> &func) const;
     int size() const;
 
 private:
-    struct Node {
+    struct Node
+    {
         std::shared_ptr<Robot> robot;
         bool color; // Red = true, Black = false
         std::shared_ptr<Node> left, right, parent;
@@ -27,6 +30,7 @@ private:
 
     std::shared_ptr<Node> root;
 
+    void clearHelper(std::shared_ptr<Node> node);
     void rotateLeft(std::shared_ptr<Node> node);
     void rotateRight(std::shared_ptr<Node> node);
     void fixInsert(std::shared_ptr<Node> node);
@@ -34,7 +38,7 @@ private:
     void transplant(std::shared_ptr<Node> u, std::shared_ptr<Node> v);
     std::shared_ptr<Node> minimum(std::shared_ptr<Node> node);
     void printInOrderHelper(std::shared_ptr<Node> node);
-    void forEachHelper(std::shared_ptr<Node> node, const std::function<void(std::shared_ptr<Robot>)>& func) const;
+    void forEachHelper(std::shared_ptr<Node> node, const std::function<void(std::shared_ptr<Robot>)> &func) const;
 };
 
 #endif

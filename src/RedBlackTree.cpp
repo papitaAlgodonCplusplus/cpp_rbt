@@ -311,3 +311,17 @@ void RedBlackTree::printInOrderHelper(std::shared_ptr<Node> node) {
         printInOrderHelper(node->right);
     }
 }
+
+RedBlackTree::~RedBlackTree() {
+    clearHelper(root);
+}
+
+void RedBlackTree::clearHelper(std::shared_ptr<Node> node) {
+    if (node) {
+        clearHelper(node->left);
+        clearHelper(node->right);
+        node->left = nullptr;
+        node->right = nullptr;
+        node->parent = nullptr;
+    }
+}
