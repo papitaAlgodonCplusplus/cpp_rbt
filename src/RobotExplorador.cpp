@@ -50,7 +50,3 @@ void RobotExplorador::recharge(int energy) {
     std::cout << name << " recharged " << energy << " units of energy. Current energy: " << energyLevel << "\n";
 }
 
-void RobotExplorador::transferEnergy(Robot& target) {
-    // RobotExplorador no transfiere energía
-}
-

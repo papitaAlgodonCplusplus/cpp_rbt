@@ -11,7 +11,7 @@ public:
     int getID() const;
     const std::string& getName() const;
     const std::string& getType() const;
-    const bool isInRange(const Robot& target, int range) const;
+    bool isInRange(const Robot& target, int range) const;
     const int& getX() const;
     const int& getY() const;
     void setDefended(bool x);

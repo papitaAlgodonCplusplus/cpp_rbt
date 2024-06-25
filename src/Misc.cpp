@@ -348,7 +348,7 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int **initialPositions,
                                     currentRobot->attack(*targetRobot);
                                     if (targetRobot->getEnergyLevel() <= 0)
                                     {
-                                        last_deleted = (occupiedPositions, numRobots, targetRobot->getX(), targetRobot->getY());
+                                        last_deleted = markPositionAvailable(occupiedPositions, numRobots, targetRobot->getX(), targetRobot->getY());
                                         rbTree.remove(targetRobot->getID());
                                         numRobots--;
                                         std::cout << targetRobot->getName() << " ha sido eliminado debido a energía 0 o menor.\n";
@@ -1245,16 +1245,16 @@ void simulateBattle(RedBlackTree &rbTree, int numRobots, int rounds)
     }
 
     // Free the memory
-    for (int i = 0; i < numStations; ++i)
-    {
-        delete[] rechargeStations[i]; // Delete each sub-array
-    }
-    delete[] rechargeStations; // Delete the main array
-
-    // Free the memory
     for (int i = 0; i < numRobots; ++i)
     {
         delete[] occupiedPositions[i]; // Delete each sub-array
     }
     delete[] occupiedPositions; // Delete the main array
+
+    // Free the memory
+    for (int i = 0; i < numStations; ++i)
+    {
+        delete[] rechargeStations[i]; // Delete each sub-array
+    }
+    delete[] rechargeStations; // Delete the main array
 }

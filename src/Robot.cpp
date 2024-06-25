@@ -11,7 +11,7 @@ const std::string& Robot::getName() const {
     return name;
 }
 
-const bool Robot::isInRange(const Robot& target, int range) const {
+bool Robot::isInRange(const Robot& target, int range) const {
     int deltaX = target.getX() - posX;
     int deltaY = target.getY() - posY;
     return (deltaX * deltaX + deltaY * deltaY) <= (range * range);

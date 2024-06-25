@@ -51,8 +51,3 @@ void RobotAsalto::recharge(int energy)
     energyLevel += energy;
     std::cout << name << " recharged " << energy << " units of energy. Current energy: " << energyLevel << "\n";
 }
-
-void RobotAsalto::transferEnergy(Robot &target)
-{
-    // RobotAsalto no transfiere energía
-}
