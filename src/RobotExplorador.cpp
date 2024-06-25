@@ -50,3 +50,13 @@ void RobotExplorador::recharge(int energy) {
     std::cout << name << " recharged " << energy << " units of energy. Current energy: " << energyLevel << "\n";
 }
 
+void RobotExplorador::transferEnergy(Robot& target) {
+    if (energyLevel >= 25) {
+        energyLevel -= 25;
+        std::cout << name << " transferred 20 energy to " << target.getName() << ".\n";
+        target.recharge(20);
+        std::cout << name << " energy is now: " << energyLevel << ".\n";
+    } else {
+        std::cout << "Not enough energy to transfer.\n";
+    }
+}
