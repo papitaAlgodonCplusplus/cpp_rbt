@@ -10,6 +10,7 @@ public:
     void attack(Robot& target) override;
     void recharge(int energy) override;
     void substract(int energy) override;
+    void transferEnergy(Robot& target) override;
 };
 
 #endif
